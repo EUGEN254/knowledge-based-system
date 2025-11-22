@@ -1,475 +1,174 @@
-
 [
   {
-    "category": "Motherboards",
+    "category": "No Power / Dead Device",
     "questions": [
       {
-        "question": "What are the key factors when selecting a replacement motherboard?",
-        "answer": "Form factor compatibility, CPU socket type, chipset features, expansion slots, RAM compatibility, BIOS support, and physical dimensions for proper case fitting."
+        "question": "my pc won't turn on at all",
+        "answer": "Complete no-power troubleshooting:\n• Check power cable is firmly plugged in at both ends\n• Try a different wall outlet (test with a lamp)\n• Hold power button 40–60 seconds to drain flea power\n• Remove and reseat RAM sticks\n• Check front panel power switch connectors on motherboard\n• Try minimal boot: motherboard + CPU + 1 RAM + PSU only\n• If desktop, test with a known-good PSU if possible"
       },
       {
-        "question": "What is ROM BIOS compatibility?",
-        "answer": "The motherboard BIOS must properly support the installed hardware components, including CPU, memory, and expansion cards, and provide necessary system initialization routines."
+        "question": "laptop completely dead no lights",
+        "answer": "Laptop no signs of life:\n1. Hold power button 40+ seconds (drain residual power)\n2. Remove battery (if removable) + unplug charger → hold power 60s → reconnect\n3. Try charging with a different known-good charger\n4. Check charging port for damage/bent pins\n5. Remove bottom panel → disconnect battery cable → hold power button 30s → reconnect\n6. If still dead → likely failed motherboard or power IC"
       },
       {
-        "question": "What are the main motherboard ports?",
-        "answer": "Common ports include USB (Type-A, Type-C), HDMI, DisplayPort, Ethernet (RJ45), audio jacks, PS/2, Thunderbolt, and sometimes legacy VGA/DVI."
+        "question": "pc turns on for 1 second then shuts off",
+        "answer": "Classic short circuit or PSU failure:\n• Remove GPU, extra drives, all USB devices\n• Reseat RAM and CPU power cables\n• Check for loose screws or standoffs under motherboard\n• Try booting with only motherboard + CPU + 1 RAM stick\n• 90% chance it's a failing power supply → replace PSU"
       },
       {
-        "question": "How to check motherboard compatibility?",
-        "answer": "Check CPU socket type, supported RAM type and speed, PCIe slots, form factor (ATX, Micro-ATX, Mini-ITX), and BIOS compatibility."
+        "question": "desktop no power but power supply fan spins",
+        "answer": "Power supply is alive but not delivering correct voltages:\n• Test with a PSU tester or paperclip test\n• Reseat 24-pin and CPU power cables\n• Try a different power supply if available\n• Check motherboard for blown capacitors or burn marks"
       }
     ]
   },
   {
-    "category": "Processors",
+    "category": "Random Shutdowns & Restarts",
     "questions": [
       {
-        "question": "What are the key processor specifications?",
-        "answer": "Data bus width, internal registers, address bus width, clock speed, cache size, manufacturing process, and power consumption requirements."
+        "question": "pc randomly shuts down",
+        "answer": "95% of random shutdowns are:\n1. Overheating → download HWMonitor → check if CPU/GPU hits 95–105°C\n2. Failing power supply (very common on 4+ year old PCs)\n3. Bad RAM or VRMs\n\nImmediate actions:\n• Clean ALL dust from fans/heatsinks (fixes 70% of cases)\n• Repaste CPU if older than 3 years\n• Run MemTest86 overnight\n• Check Windows Event Viewer → Critical Kernel-Power Event ID 41"
       },
       {
-        "question": "What was significant about the Intel 8088 processor?",
-        "answer": "The 8088 used a 16-bit internal architecture with an 8-bit external data bus, making it cost-effective for the original IBM PC while maintaining good performance."
+        "question": "laptop shuts down randomly",
+        "answer": "Laptop-specific causes:\n• Dust-clogged cooling system (most common)\n• Dried thermal paste/pads\n• Battery failing (causes shutdown even when plugged in)\n• Power adapter failing under load\n\nFix order:\n1. Clean vents and fans thoroughly\n2. Elevate laptop for better airflow\n3. Run powercfg /batteryreport\n4. Test with battery removed (plugged in only)\n5. Replace thermal paste if 3+ years old"
       },
       {
-        "question": "How to choose a CPU for a computer?",
-        "answer": "Consider core count, clock speed, cache size, power consumption (TDP), socket compatibility with motherboard, and intended use (gaming, workstation, general)."
-      },
-      {
-        "question": "How to check CPU temperature?",
-        "answer": "Use software tools like HWMonitor, Core Temp, or BIOS/UEFI monitoring. Ensure temperature stays below manufacturer's recommended limit under load."
-      },
-      {
-        "question": "What are common CPU upgrade options?",
-        "answer": "Overdrive processors, clock doubling chips, complete motherboard replacements, or using upgrade sockets designed for specific processor families."
+        "question": "pc restarts randomly",
+        "answer": "Same causes as shutdowns + BSODs happening too fast to see:\n• Enable 'Automatic restart on system failure' OFF in Windows\n• Check Event Viewer for WHEA_Uncorrectable_Error or Kernel Power 41\n• Update BIOS if available\n• Stress test with Prime95 + FurMark to force the issue"
       }
     ]
   },
   {
-    "category": "Memory",
+    "category": "Overheating & Loud Fans",
     "questions": [
       {
-        "question": "What is the system logical memory layout?",
-        "answer": "Conventional memory (0-640KB), Upper Memory Area (640KB-1MB), Extended Memory (above 1MB), and Expanded Memory using bank switching techniques."
+        "question": "laptop getting very hot",
+        "answer": "Immediate actions:\n• Clean all vents and fans with compressed air\n• Use on hard flat surface (not bed/blanket)\n• Download HWMonitor → monitor temps\n• Undervolt CPU/GPU with ThrottleStop or Intel XTU\n• Repaste CPU/GPU if 2+ years old\n• Consider laptop cooling pad\n\nDanger zone: >90°C sustained = permanent damage risk"
       },
       {
-        "question": "What is ROM shadowing?",
-        "answer": "A technique where ROM contents are copied into faster RAM during system startup to improve performance of BIOS and adapter ROM routines."
-      },
-      {
-        "question": "How much RAM do I need?",
-        "answer": "8GB is minimum for general use, 16GB recommended for gaming, 32GB or more for heavy multitasking or content creation."
-      },
-      {
-        "question": "What is RAM?",
-        "answer": "RAM (Random Access Memory) is volatile memory used by your computer to store data temporarily while running programs."
+        "question": "fans always loud",
+        "answer": "Constant high fan speed means:\n• Dust buildup (90% of cases)\n• Windows power plan set to High Performance\n• Background processes (check Task Manager)\n• Dried thermal paste\n\nFixes:\n1. Clean dust thoroughly\n2. Set power plan to Balanced\n3. Repaste CPU/GPU\n4. Update BIOS for better fan curves"
       }
     ]
   },
   {
-    "category": "Storage",
+    "category": "Performance & Slowness",
     "questions": [
       {
-        "question": "How do floppy disk drives work?",
-        "answer": "They use read/write heads that physically contact magnetic media disks, with data organized in concentric tracks divided into sectors for storage."
+        "question": "why is my computer so slow",
+        "answer": "Top real causes in 2025:\n1. Still on HDD → upgrade to SSD (biggest speed boost)\n2. Less than 16GB RAM → upgrade to 32GB\n3. Too many startup programs\n4. Malware or bloatware\n5. Full C: drive\n6. Overheating causing throttling\n\nQuick fixes:\n• Run Malwarebytes scan\n• Disable startup apps in Task Manager\n• Clean disk with Storage Sense\n• Upgrade to SSD + fresh Windows install = like new PC"
       },
       {
-        "question": "What are the main hard disk drive interfaces?",
-        "answer": "ST-506/412, ESDI, IDE/ATA, SCSI, with IDE and SCSI being the most common in later systems offering different performance and connectivity options."
-      },
-      {
-        "question": "Types of computer storage devices",
-        "answer": "HDDs (mechanical), SSDs (flash-based), NVMe M.2 SSDs (faster), and external drives or network storage."
-      },
-      {
-        "question": "Hard drive making noise",
-        "answer": "Backup data immediately - clicking or grinding sounds indicate imminent drive failure. Replace drive and restore data."
-      },
-      {
-        "question": "Disk full error",
-        "answer": "Run disk cleanup, uninstall unused programs, move files to external storage, clear browser cache, and empty recycle bin."
-      },
-      {
-        "question": "External drive not recognized",
-        "answer": "Try different USB port, check in Disk Management, update USB drivers, try on another computer, and check power for external drives."
-      },
-      {
-        "question": "How to recover deleted files?",
-        "answer": "Stop using the drive immediately, use recovery software like Recuva, check recycle bin, and restore from backup if available."
+        "question": "laptop slow all of a sudden",
+        "answer": "Sudden slowdown usually:\n• Windows update gone wrong\n• Antivirus doing full scan\n• Cryptominer malware\n• Thermal throttling from dust\n\nDo this now:\n1. Open Task Manager → sort by CPU/Disk\n2. Run Malwarebytes + HitmanPro\n3. Roll back recent Windows update\n4. Clean dust from fans"
       }
     ]
   },
   {
-    "category": "Power Supply",
+    "category": "Display Issues",
     "questions": [
       {
-        "question": "What is the Power_Good signal?",
-        "answer": "A +5V signal sent from the power supply to the motherboard when all voltages are stable and within specification, allowing the CPU to begin operation."
+        "question": "black screen but fans spinning",
+        "answer": "Hardware is running but no display:\n• Reseat RAM completely\n• Try HDMI vs DisplayPort\n• Boot with only integrated graphics (remove GPU)\n• Clear CMOS (remove battery or jumper)\n• Shine flashlight on screen → can you see faint image? → backlight or inverter failure"
       },
       {
-        "question": "How to calculate power supply requirements?",
-        "answer": "Sum the power consumption of all components (motherboard, CPU, drives, cards) and add 20-30% overhead for safety and future expansion."
+        "question": "no display after startup",
+        "answer": "Try this exact order:\n1. Different cable/monitor\n2. Reseat GPU + power cables\n3. Boot with integrated graphics\n4. Clear CMOS\n5. Remove and reseat RAM\n6. Check for bent CPU pins (carefully!)"
+      },
+      {
+        "question": "screen flickering",
+        "answer": "Common causes:\n• Bad cable (try different HDMI/DP)\n• Wrong refresh rate (set to 60Hz)\n• Outdated GPU drivers → use DDU to clean install\n• Faulty monitor → test on another PC"
       }
     ]
   },
   {
-    "category": "Display",
+    "category": "Storage Emergencies",
     "questions": [
       {
-        "question": "What is the difference between interlaced and noninterlaced displays?",
-        "answer": "Interlaced displays draw odd and even scan lines in alternating passes, while noninterlaced displays draw all lines sequentially, reducing flicker."
+        "question": "hard drive making clicking noise",
+        "answer": "CRITICAL: Your mechanical HDD is dying!\n• STOP using it immediately\n• DO NOT run chkdsk or defrag\n• Backup important data NOW using another PC if possible\n• Replace with SSD immediately\n• Use professional recovery service only if data is irreplaceable"
       },
       {
-        "question": "Monitor shows no signal",
-        "answer": "Check video cable connections, ensure monitor is on correct input source, test with different cable, and try integrated graphics if available."
-      },
-      {
-        "question": "Screen flickering",
-        "answer": "Update graphics drivers, check cable connections, adjust refresh rate, test with different monitor, and check for interference."
-      },
-      {
-        "question": "No display on monitor",
-        "answer": "Check power and video cables, try different input source, test with another monitor, and reseat graphics card."
-      },
-      {
-        "question": "Why is my monitor flickering?",
-        "answer": "Check the display cable for loose connections, update graphics drivers, adjust refresh rate, try another cable or monitor, and check for electromagnetic interference."
-      },
-      {
-        "question": "Monitor has dead pixels",
-        "answer": "Use pixel-fixing software, apply gentle pressure on the dead pixel, check warranty for replacement, or consider professional repair."
-      },
-      {
-        "question": "Monitor colors look wrong",
-        "answer": "Calibrate the display, update graphics drivers, check color profile settings, ensure cables are properly connected, and test on another device."
-      },
-      {
-        "question": "What is refresh rate?",
-        "answer": "The number of times per second a monitor updates the displayed image, measured in Hz (e.g., 60Hz, 120Hz, 144Hz). Higher refresh rates produce smoother motion."
-      },
-      {
-        "question": "What is resolution?",
-        "answer": "Number of pixels displayed on screen, e.g., 1920x1080 (Full HD), 2560x1440 (QHD), 3840x2160 (4K). Higher resolution increases detail and clarity."
+        "question": "disk is full",
+        "answer": "Free up space fast:\n• Run Disk Cleanup as admin\n• Delete %temp% folder\n• Uninstall unused programs\n• Move Documents/Downloads to D: drive\n• Use TreeSize Free to find largest files\n• Empty Recycle Bin"
       }
     ]
   },
   {
-    "category": "Input Devices",
+    "category": "Blue Screen (BSOD)",
     "questions": [
       {
-        "question": "What are the main keyboard technologies?",
-        "answer": "Mechanical switches, membrane keyboards, capacitive keyboards, and scissor-switch designs, each with different tactile feedback and durability characteristics."
-      },
-      {
-        "question": "Types of keyboards",
-        "answer": "Mechanical, membrane, scissor-switch, and ergonomic keyboards."
-      },
-      {
-        "question": "Keyboard is not working",
-        "answer": "Check USB connection, try different port, restart computer, test on another device, and update drivers."
-      },
-      {
-      "question": "Laptop keyboard not working at all",
-      "answer": "Try an external USB keyboard first to test. Restart the laptop. Check for physical damage or liquid spills. Update keyboard drivers in Device Manager. If recent software install, try System Restore."
-    },
-    {
-      "question": "Some keys not working on laptop keyboard",
-      "answer": "Clean around the non-working keys with compressed air. Check for stuck keys or debris. Update keyboard drivers. Test in BIOS to rule out software issues. May need keyboard replacement if hardware issue."
-    },
-    {
-      "question": "Laptop keyboard typing wrong characters",
-      "answer": "Check if Num Lock is accidentally enabled. Verify language and keyboard layout settings in Control Panel. Run keyboard troubleshooter in Windows Settings. Update or reinstall keyboard drivers."
-    },
-    {
-      "question": "Laptop keyboard repeating letters",
-      "answer": "Adjust keyboard repeat delay in Keyboard Settings. Clean the affected keys with compressed air. Update keyboard drivers. Check for stuck keys. May need keyboard replacement if hardware issue persists."
-    },
-    {
-      "question": "Backlight not working on laptop keyboard",
-      "answer": "Check keyboard backlight shortcut keys (usually Fn + F4/F5 or spacebar icon). Update keyboard drivers and BIOS. Check power settings that may disable backlight. If recent hardware change, check connections."
-    },
-    {
-      "question": "Spilled liquid on laptop keyboard",
-      "answer": "IMMEDIATELY shut down laptop, unplug power, remove battery if possible. Turn laptop upside down to drain liquid. Do not use heat to dry. Let dry completely for 48+ hours. Professional cleaning may be needed."
-    },
-    {
-      "question": "Laptop keyboard making strange noises",
-      "answer": "Clicking sounds may indicate mechanical issues. Clean with compressed air. Check for loose components. If under warranty, contact manufacturer. Consider external keyboard if noise persists."
-    },
-    {
-      "question": "Fn keys not working on laptop",
-      "answer": "Install manufacturer-specific keyboard utility/drivers. Check BIOS settings for function key behavior. Try Fn + Esc to toggle function lock. Update chipset drivers. Restart laptop."
-    },
-    {
-      "question": "Laptop keyboard not working after Windows update",
-      "answer": "Roll back keyboard drivers in Device Manager. Use System Restore to point before update. Check manufacturer website for updated drivers. Try Windows Keyboard Troubleshooter."
-    },
-    {
-      "question": "Wireless keyboard not connecting to laptop",
-      "answer": "Replace batteries. Re-pair the keyboard (check manufacturer instructions). Try different USB port for receiver. Update Bluetooth/Wireless drivers. Restart laptop and keyboard."
-    },
-    {
-      "question": "Laptop keyboard and touchpad not working",
-      "answer": "Likely driver or system issue. Try external keyboard/mouse. Boot in Safe Mode. Update chipset drivers. Check for recent software changes. May need system restore or repair."
-    },
-    {
-      "question": "How to clean laptop keyboard properly",
-      "answer": "Turn off laptop first. Use compressed air between keys. Gently wipe keys with slightly damp cloth (not wet). Avoid liquids near keyboard. For deep cleaning, consider professional service."
-    },
-    {
-      "question": "Laptop keyboard replacement cost",
-      "answer": "Typically $50-$150 for parts plus $50-$100 labor if done professionally. DIY replacement possible but requires technical skill. Check if under warranty first. Consider external keyboard as cheaper alternative."
-    },
-    {
-      "question": "Keyboard shortcuts not working on laptop",
-      "answer": "Update keyboard drivers. Check if Fn key is stuck. Test in different applications. Restart laptop. Verify shortcut assignments in specific software. Check accessibility settings."
-    },
-      {
-        "question": "Mouse cursor jumping",
-        "answer": "Clean mouse sensor, use mouse pad, update drivers, check for interference, and try different USB port."
-      },
-      {
-        "question": "Mouse not working",
-        "answer": "Check connection (USB or Bluetooth), replace batteries if wireless, test on another computer, update drivers, and clean sensor area."
-      },
-      {
-        "question": "Keyboard keys not working",
-        "answer": "Clean keyboard, try different USB port, test on another computer, check for driver updates, and replace if hardware failure."
+        "question": "blue screen of death",
+        "answer": "Write down the stop code! Common ones:\n• MEMORY_MANAGEMENT → bad RAM → run MemTest86\n• IRQL_NOT_LESS_OR_EQUAL → driver conflict → update all drivers\n• PAGE_FAULT_IN_NONPAGED_AREA → bad storage/driver\n• CRITICAL_PROCESS_DIED → system file corruption → run sfc /scannow + DISM\n\nAlways:\n1. Update Windows\n2. Update all drivers from manufacturer sites\n3. Run memory diagnostic"
       }
     ]
   },
   {
-  "category": "Ports & Connectivity",
-  "questions": [
-    {
-      "question": "USB ports not working",
-      "answer": "Try different USB port, restart computer, update USB drivers, check Device Manager for errors, and test with different USB device."
-    },
-    {
-      "question": "USB device not recognized",
-      "answer": "Try different USB port, update USB drivers, check Device Manager, try on another computer, and check for physical damage."
-    }
-  ]
-},
-  {
-    "category": "Audio",
+    "category": "Keyboard & Input",
     "questions": [
       {
-        "question": "What is sampling in sound cards?",
-        "answer": "The process of converting analog sound waves into digital data by taking amplitude measurements at regular intervals, with higher sampling rates providing better quality."
+        "question": "laptop keyboard not working",
+        "answer": "Try this order:\n1. Restart twice\n2. Plug in external USB keyboard (does it work?)\n3. Update keyboard driver in Device Manager\n4. Uninstall recent Windows update\n5. Boot into BIOS → does keyboard work there?\n   → Yes = Windows issue\n   → No = hardware failure (needs replacement)"
       },
       {
-        "question": "No sound from computer",
-        "answer": "Check volume settings, ensure correct playback device, update audio drivers, test headphones, and check cable connections."
+        "question": "some keys not working on laptop",
+        "answer": "Usually debris or liquid damage:\n• Turn laptop upside down and shake gently\n• Use compressed air between keys\n• Clean with isopropyl alcohol + cotton swab\n• If sticky → likely liquid damage → needs professional cleaning or replacement"
       },
       {
-        "question": "Microphone not working",
-        "answer": "Check privacy settings, set as default device, update drivers, test on another device, and check app permissions."
+        "question": "spilled water on laptop keyboard",
+        "answer": "EMERGENCY LIQUID SPILL PROCEDURE:\n1. POWER OFF IMMEDIATELY\n2. Unplug charger\n3. Remove battery if possible\n4. Turn upside down (keyboard facing down)\n5. Blot (don’t wipe) with paper towel\n6. DO NOT use hairdryer or rice\n7. Leave upside down in front of fan for 72+ hours\n8. Pray and try powering on"
       }
     ]
   },
   {
-    "category": "Networking",
+    "category": "Audio Issues",
     "questions": [
       {
-        "question": "What are the main LAN cable types?",
-        "answer": "Twisted pair (UTP/STP), coaxial (thinnet/thicknet), and fiber optic cables, each with different bandwidth, distance, and installation characteristics."
-      },
-      {
-        "question": "PC cannot connect to Wi-Fi",
-        "answer": "Check if Wi-Fi adapter is enabled, verify the password, and restart the router."
-      },
-      {
-        "question": "WiFi keeps disconnecting",
-        "answer": "Update network drivers, change WiFi channel, move closer to router, check for interference, and reset network settings."
-      },
-      {
-        "question": "Slow internet speed",
-        "answer": "Test speed at different times, restart modem/router, check for background downloads, update firmware, and contact ISP if consistent."
-      },
-      {
-        "question": "Can't connect to WiFi",
-        "answer": "Check if WiFi is enabled, forget network and reconnect, restart router, update drivers, and check password correctness."
-      },
-      {
-        "question": "Ethernet not working",
-        "answer": "Check cable connection, try different port, update network drivers, reset TCP/IP stack, and test with different cable."
-      },
-      {
-        "question": "How to improve Wi-Fi speed?",
-        "answer": "Move closer to router, reduce interference, change Wi-Fi channel, update firmware, and use 5GHz band if supported."
-      },
-      {
-        "question": "Ethernet cable types",
-        "answer": "Cat5e (up to 1Gbps), Cat6 (up to 10Gbps), Cat6a (better shielding), Cat7 (higher bandwidth and shielding)."
-      },
-      {
-        "question": "What is an Ethernet port?",
-        "answer": "A port to connect wired network cables (RJ45) to the local network or internet."
+        "question": "no sound from laptop",
+        "answer": "Check these in order:\n1. Volume mixer (is app muted?)\n2. Correct playback device selected\n3. Update audio drivers from manufacturer\n4. Run Windows Audio Troubleshooter\n5. Restart Windows Audio service\n6. Test with headphones\n7. Reinstall Realtek/Conexant drivers"
       }
     ]
   },
   {
-    "category": "Ports & Connectivity",
+    "category": "Network & Wi-Fi",
     "questions": [
       {
-        "question": "What is USB-C used for?",
-        "answer": "Data transfer, charging devices, video output (DisplayPort/HDMI alternate mode), and connecting peripherals like docks or external drives."
+        "question": "no internet connection",
+        "answer": "Full Wi-Fi troubleshooting:\n1. Restart router + modem\n2. Forget network → reconnect\n3. Run Windows Network Troubleshooter\n4. ipconfig /release → /renew\n5. netsh int ip reset\n6. Update Wi-Fi drivers\n7. Disable VPN/antivirus temporarily\n8. Try phone hotspot → works? → router issue"
       },
       {
-        "question": "USB ports not working",
-        "answer": "Try different USB port, restart computer, update USB drivers, check Device Manager for errors, and test with different USB device."
-      },
-      {
-        "question": "USB device not recognized",
-        "answer": "Try different USB port, update USB drivers, check Device Manager, try on another computer, and check for physical damage."
-      },
-      {
-        "question": "HDMI output not working",
-        "answer": "Check cable and port, ensure monitor input source is correct, update graphics drivers, test with another HDMI device, and reboot computer."
+        "question": "wifi keeps dropping",
+        "answer": "Usually interference or driver issue:\n• Change Wi-Fi channel in router settings\n• Update Wi-Fi drivers\n• Disable power saving for Wi-Fi adapter\n• Move closer to router or use 5GHz band\n• Check for microwave/cordless phone interference"
       }
     ]
   },
   {
-    "category": "Troubleshooting",
+    "category": "Battery & Charging",
     "questions": [
       {
-        "question": "What is the Power-On Self Test (POST)?",
-        "answer": "A series of diagnostic tests performed by the BIOS during startup to verify critical hardware components are functioning properly before booting the OS."
-      },
-      {
-        "question": "What are common POST error codes?",
-        "answer": "Audio beep codes and numeric display codes that indicate specific hardware failures, such as memory errors, video problems, or keyboard issues."
-      },
-      {
-        "question": "Computer making noise",
-        "answer": "Identify noise source: fan noise (clean/replace fan), hard drive clicking (backup data immediately), or coil whine (usually harmless)."
-      },
-      {
-        "question": "How to check computer temperature",
-        "answer": "Use software like HWMonitor, Core Temp, or SpeedFan to monitor CPU and GPU temperatures in real-time."
-      },
-      {
-        "question": "Blue Screen of Death (BSOD)",
-        "answer": "Note the stop code, restart computer, update drivers, check memory with diagnostics, and ensure system is not overheating."
-      },
-      {
-        "question": "Computer randomly shutting down or restarting",
-        "answer": "This is most commonly caused by overheating (check CPU/GPU temperatures with HWMonitor), a failing power supply, or hardware instability (test RAM with MemTest86). If the CPU exceeds 95°C or GPU exceeds 90°C, the system will shut down to protect itself."
+        "question": "laptop battery not charging",
+        "answer": "Try this exact sequence:\n1. Unplug charger → hold power button 60s → plug back in\n2. Try different charger\n3. Remove battery (if removable) → plug in directly\n4. Run powercfg /batteryreport\n5. Update BIOS + chipset drivers\n6. Battery may be dead (2–4 year lifespan)\n7. If swollen → REPLACE IMMEDIATELY (fire hazard!)"
       }
     ]
   },
   {
-    "category": "Performance",
+    "category": "Boot Problems",
     "questions": [
       {
-        "question": "Why is my computer slow?",
-        "answer": "Common causes: too many startup programs, insufficient RAM, malware infection, fragmented hard drive, or overheating components."
-      },
-      {
-        "question": "How to speed up slow computer?",
-        "answer": "Clean up disk space, disable startup programs, upgrade RAM, run malware scan, defragment hard drive, and update drivers."
-      },
-      {
-        "question": "Computer freezing randomly",
-        "answer": "Check for overheating, update drivers, run memory test, scan for malware, and check event viewer for error patterns."
-      },
-      {
-        "question": "High CPU usage",
-        "answer": "Open Task Manager to identify resource-heavy processes, update software, scan for malware, and check for background mining software."
+        "question": "stuck on automatic repair",
+        "answer": "Windows failed to boot:\n1. Power off completely 3 times → enter Recovery\n2. Try Startup Repair\n3. System Restore to earlier point\n4. Command Prompt → bootrec /fixmbr → /fixboot → /rebuildbcd\n5. If SSD → check cable or try different SATA port\n6. Last resort → reset Windows keeping files"
       }
     ]
   },
   {
-    "category": "Software",
+    "category": "Critical Emergencies",
     "questions": [
       {
-        "question": "What are the main DOS components?",
-        "answer": "IO.SYS (basic I/O system), MSDOS.SYS (file management), COMMAND.COM (command interpreter), and device drivers for hardware support."
+        "question": "computer smells like burning",
+        "answer": "IMMEDIATE SAFETY HAZARD!\n• UNPLUG FROM POWER NOW\n• DO NOT touch if hot\n• Open case → locate source (usually PSU or GPU)\n• If smoke continues → evacuate and call fire department\n• Do not use until professionally inspected"
       },
       {
-        "question": "How to install Python on Linux?",
-        "answer": "Use sudo apt install python3 python3-pip and verify installation with python3 --version."
-      },
-      {
-        "question": "Programs crashing frequently",
-        "answer": "Update the program, check for Windows updates, run as administrator, reinstall the software, and check compatibility mode."
-      },
-      {
-        "question": "Windows update problems",
-        "answer": "Run Windows Update troubleshooter, clear update cache, check disk space, and manually download updates from Microsoft catalog."
-      },
-      {
-        "question": "How to remove viruses?",
-        "answer": "Run full system scan with updated antivirus, use malware removal tools like Malwarebytes, boot in safe mode, and reset browser settings."
-      },
-      {
-        "question": "Software installation failed",
-        "answer": "Check system requirements, run installer as administrator, disable antivirus temporarily, and ensure adequate disk space."
-      }
-    ]
-  },
-  {
-    "category": "Security",
-    "questions": [
-      {
-        "question": "Computer infected with virus",
-        "answer": "Disconnect from internet, boot in safe mode, run multiple antivirus scans, change all passwords, and consider system restore."
-      },
-      {
-        "question": "Ransomware attack",
-        "answer": "Disconnect from network immediately, don't pay ransom, use ransomware decryption tools, and restore from clean backup."
-      },
-      {
-        "question": "Browser hijacked",
-        "answer": "Reset browser settings, remove suspicious extensions, run malware scan, and check hosts file for redirects."
-      },
-      {
-        "question": "Antivirus says it found threats",
-        "answer": "Quarantine or remove threats, run full system scan, update antivirus definitions, and consider second opinion scan with different antivirus."
-      }
-    ]
-  },
-  {
-    "category": "Hardware Maintenance",
-    "questions": [
-      {
-        "question": "What are key preventive maintenance procedures?",
-        "answer": "Regular cleaning of components, backup of critical data, monitoring system temperatures, checking power supply outputs, and updating firmware/drivers."
-      },
-      {
-        "question": "How to clean computer fans",
-        "answer": "Use compressed air to blow dust out of fans and heatsinks. Hold fans still while cleaning to prevent damage."
-      },
-      {
-        "question": "Computer maintenance tips",
-        "answer": "Regularly update software, run antivirus scans, clean temporary files, defragment HDDs, and keep system physically clean."
-      },
-      {
-        "question": "How to upgrade RAM?",
-        "answer": "Check compatibility, power off computer, ground yourself, insert modules firmly, and verify recognition in BIOS."
-      }
-    ]
-  },
-  {
-    "category": "Emergency",
-    "questions": [
-      {
-        "question": "Computer smells like burning",
-        "answer": "IMMEDIATELY shut down and unplug. Do not use. Check for visible damage, smell power supply and motherboard. May need professional repair."
-      },
-      {
-        "question": "computer smells burning",
-        "answer": "IMMEDIATE SAFETY HAZARD! Unplug immediately, remove battery if possible. Do not attempt to use. Risk of fire or electrical hazard. Seek professional repair."
-      },
-      {
-        "question": "Computer smoking or sparking",
-        "answer": "CRITICAL SAFETY ISSUE! Immediately unplug from power. Do not use water. Evacuate area if heavy smoke. Contact professional technician."
-      },
-      {
-        "question": "I spilled water on my laptop!",
-        "answer": "Immediately shut down, unplug power, remove battery if possible, dry with cloth, don't use heat, and let dry completely for 48+ hours."
+        "question": "laptop battery swollen",
+        "answer": "DANGER: Swollen battery can explode!\n• STOP using immediately\n• Do not puncture or charge\n• Remove battery carefully (wear gloves)\n• Store in cool place away from flammable items\n• Replace with genuine battery only"
       }
     ]
   }

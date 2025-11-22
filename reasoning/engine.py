@@ -10,11 +10,11 @@ from typing import List, Dict, Any, Optional
 
 # Comprehensive symptom definitions with patterns and expert advice
 SYMPTOM_DEFINITIONS = {
-    "random_shutdown": {
+   "random_shutdown": {
         "patterns": [
-            "shut down", "shutting down", "turns off", "powers off", 
-            "randomly off", "sudden shutdown", "shuts itself off",
-            "random restart", "restarts randomly", "rebooting randomly"
+            "shut down", "shutting down", "turns off", "powers off", "randomly off",
+            "sudden shutdown", "shuts itself off", "random restart", "restarts randomly",
+            "rebooting randomly", "shuts down while gaming", "turns off during game"
         ],
         "expert_advice": {
             "type": "expert_diagnosis",
@@ -30,18 +30,12 @@ SYMPTOM_DEFINITIONS = {
                 "Clean ALL dust from fans and heatsinks (90% of cases fixed here)",
                 "Repaste CPU/GPU if system is older than 3 years",
                 "Test with a known-good PSU if possible",
-                "Run MemTest86 overnight (free)"
-            ],
-            "troubleshooting_steps": [
-                "1. Monitor temperatures immediately",
-                "2. Clean dust (most common fix)",
-                "3. Check Event Viewer → Kernel-Power Event ID 41",
-                "4. Reseat RAM and power cables",
-                "5. Test PSU with tester or spare"
+                "Run MemTest86 overnight (free)",
+                "Check Event Viewer → Kernel-Power Event ID 41"
             ]
         }
     },
-    
+ 
     "no_power": {
         "patterns": [
             "won't turn on", "no power", "completely dead", "not powering on", 
@@ -71,20 +65,21 @@ SYMPTOM_DEFINITIONS = {
         }
     },
     
-    "slow": {
-        "patterns": ["slow", "lag", "laggy", "sluggish"],
+   "slow": {
+        "patterns": ["slow", "lag", "laggy", "sluggish", "takes forever", "very slow"],
         "expert_advice": {
             "type": "expert_diagnosis",
-            "content": "System slow or freezing? 95% of cases:",
+            "content": "System slow? 95% of cases fixed by one of these:",
             "category": "Performance",
             "confidence": "high",
             "priority": "MEDIUM",
             "rule_advice": [
-                "Open Task Manager → End unnecessary processes",
-                "Upgrade to SSD if still on HDD",
-                "Add more RAM (16GB minimum, 32GB ideal)",
-                "Scan with Malwarebytes (free)",
-                "Disable startup programs"
+                "Still on HDD → upgrade to SSD = 10x faster",
+                "Less than 16GB RAM → upgrade to 32GB",
+                "Open Task Manager → kill junk processes",
+                "Run Malwarebytes full scan",
+                "Disable startup programs",
+                "Clean disk + empty %temp%"
             ]
         }
     },
@@ -120,74 +115,64 @@ SYMPTOM_DEFINITIONS = {
         }
     },
     
-    "crashing": {
-        "patterns": ["crash", "crashing", "freezing", "frozen"],
+   "crashing": {
+        "patterns": ["crash", "crashing", "freezing", "frozen", "freeze", "hang", "not responding"],
         "expert_advice": {
             "type": "expert_diagnosis",
-            "content": "System crashes or freezes typically indicate:\n"
-                       "• Driver conflicts (especially GPU drivers)\n" 
-                       "• Overheating components\n"
-                       "• Failing RAM or storage\n"
-                       "• Software conflicts or corrupt system files",
+            "content": "Crashes/freezes = usually one of these:",
             "category": "Stability",
             "confidence": "high",
             "priority": "HIGH",
             "rule_advice": [
-                "Check Event Viewer for error codes",
-                "Update ALL drivers (chipset, GPU, audio, network)",
+                "Update GPU + chipset drivers (DDU clean install)",
                 "Run Windows Memory Diagnostic overnight",
-                "Test with different RAM configurations",
-                "Run: DISM /Online /Cleanup-Image /RestoreHealth"
+                "Check temperatures (overheating = crash)",
+                "sfc /scannow + DISM /Online /Cleanup-Image /RestoreHealth",
+                "Clean Windows install if persistent"
             ]
         }
     },
-    
+
     "overheating": {
-        "patterns": ["hot", "overheat", "overheating", "burning"],
+        "patterns": ["hot", "overheat", "overheating", "burning", "too hot", "thermal throttle"],
         "expert_advice": {
             "type": "expert_diagnosis",
-            "content": "OVERHEATING DETECTED! This can cause permanent damage:\n"
-                       "• Dust/clogged cooling system (90% of cases)\n"
-                       "• Dried thermal paste (2+ years old)\n"
-                       "• Faulty or stopped fans\n"
-                       "• Blocked air vents or bad airflow",
+            "content": "OVERHEATING DETECTED → PERMANENT DAMAGE IMMINENT:",
             "category": "Thermal Emergency",
+            "confidence": "high",
+            "priority": "CRITICAL",
+            "rule_advice": [
+                "STOP USING NOW → clean dust from ALL fans/heatsinks",
+                "Download HWMonitor → check temps (90°C+ = danger)",
+                "Repaste CPU/GPU if 2+ years old",
+                "Elevate laptop / use cooling pad",
+                "Undervolt with ThrottleStop/Intel XTU"
+            ]
+        }
+    },
+
+    "screen_issue": {
+        "patterns": [
+            "black screen", "no display", "flickering", "glitchy screen", "screen glitch",
+            "lines on screen", "artifacts", "distorted screen"
+        ],
+        "additional_check": lambda words: any(word in words for word in ["screen", "display", "monitor"]),
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "Display problem detected:",
+            "category": "Display",
             "confidence": "high",
             "priority": "HIGH",
             "rule_advice": [
-                "IMMEDIATELY clean dust from all fans/heatsinks",
-                "Check temperatures with HWMonitor or Core Temp",
-                "Replace thermal paste if 2+ years old",
-                "Ensure proper airflow — elevate laptop if needed",
-                "Reduce load if temps exceed 85°C"
+                "Try different cable/monitor",
+                "Boot in Safe Mode (driver issue?)",
+                "DDU + reinstall GPU drivers",
+                "Reseat GPU (desktop)",
+                "Shine flashlight on screen → faint image? = backlight dead"
             ]
         }
     },
-    
-    "screen_issue": {
-        "patterns": [
-            "black screen", "no display", "flickering", "glitchy screen"
-        ],
-        "additional_check": lambda words: any(word in words for word in ["screen", "display"]),
-        "expert_advice": {
-            "type": "expert_diagnosis",
-            "content": "Display issues can be:\n"
-                       "• GPU driver problems (most common)\n"
-                       "• Failing graphics card\n"
-                       "• Loose display cables\n"
-                       "• Backlight or LCD panel failure",
-            "category": "Display",
-            "confidence": "high",
-            "priority": "MEDIUM",
-            "rule_advice": [
-                "Boot in Safe Mode to test basic display",
-                "Update or reinstall GPU drivers with DDU",
-                "Check display cable connections",
-                "Test with external monitor if possible",
-                "Reseat GPU if desktop system"
-            ]
-        }
-    },
+
     
     "disk_full": {
         "patterns": [
@@ -423,28 +408,158 @@ SYMPTOM_DEFINITIONS = {
     
     "boot_failure": {
         "patterns": [
-            "won't boot", "stuck on logo", "automatic repair", "diagnosing your pc"
+            "won't boot", "wont boot", "won't start", "wont start",
+            "stuck on logo", "stuck at logo", "frozen on logo", "stuck on motherboard logo",
+            "asus logo", "dell logo", "hp logo", "lenovo logo", "msi logo",
+            "stuck in booting", "stuck booting", "stuck during boot", "stuck while booting",
+            "stuck on loading", "loading forever", "circle spinning forever", "dots spinning",
+            "automatic repair", "preparing automatic repair", "diagnosing your pc",
+            "hung on boot", "hangs on boot", "freezes during boot", "black screen after logo",
+            "no boot device", "boot device not found", "bootmgr is missing"
         ],
         "expert_advice": {
             "type": "expert_diagnosis",
-            "content": "Boot failure troubleshooting:\n"
-                       "• Corrupt boot configuration\n"
-                       "• Failing storage drive\n"
-                       "• RAM or motherboard issues\n"
-                       "• UEFI/BIOS configuration problems",
+            "content": "Windows won't boot → follow this exact order:",
             "category": "Boot Issues",
             "confidence": "high",
-            "priority": "HIGH",
+            "priority": "CRITICAL",
             "rule_advice": [
-                "Try Windows Automatic Repair",
-                "Rebuild BCD: bootrec /rebuildbcd",
-                "Test with minimal hardware configuration",
-                "Check boot order in BIOS/UEFI",
-                "Test RAM with MemTest86"
+                "Force power off 3 times → enter Recovery",
+                "Startup Repair → System Restore",
+                "Command Prompt → bootrec /fixmbr → /fixboot → /rebuildbcd",
+                "If SSD → check cable or test in another PC",
+                "Reseat RAM + reset BIOS",
+                "Last resort → Reset Windows (keep files) or clean install"
             ]
         }
     },
-    
+
+    "audio_jack_issue": {
+        "patterns": [
+            "headphone jack not working", "earphone port not working", "audio jack not working",
+            "headphones not detected", "no sound in headphones", "plugged in but sound from speakers",
+            "headphone socket broken", "3.5mm jack dead"
+        ],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "Headphone jack dead → 95% fixed with this:",
+            "category": "Audio",
+            "confidence": "high",
+            "priority": "MEDIUM",
+            "rule_advice": [
+                "Plug/unplug 10 times rapidly",
+                "Clean jack with toothpick + alcohol",
+                "Restart twice",
+                "Download REAL driver from laptop brand",
+                "Disable audio enhancements",
+                "Still dead → jack broken → use USB/Bluetooth adapter"
+            ]
+        }
+    },
+
+    "usb_port_issue": {
+        "patterns": [
+            "usb port not working", "usb not recognized", "usb device not detected",
+            "usb ports dead", "usb-c not working", "charging port not working"
+        ],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "USB ports not working:",
+            "category": "Ports",
+            "confidence": "high",
+            "priority": "MEDIUM",
+            "rule_advice": [
+                "Try all ports + different devices",
+                "Device Manager → uninstall all USB controllers → restart",
+                "Update chipset drivers",
+                "Disable USB power saving",
+                "Still dead → USB controller failed"
+            ]
+        }
+    },
+
+    "bluetooth_issue": {
+        "patterns": [
+            "bluetooth not working", "bluetooth disappeared", "can't find bluetooth",
+            "airpods won't connect", "bluetooth device not connecting"
+        ],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "Bluetooth missing or not connecting:",
+            "category": "Connectivity",
+            "confidence": "high",
+            "priority": "MEDIUM",
+            "rule_advice": [
+                "Toggle Bluetooth off/on",
+                "Device Manager → show hidden → uninstall Bluetooth",
+                "Restart twice",
+                "Update Bluetooth + chipset drivers from manufacturer",
+                "Run Bluetooth troubleshooter"
+            ]
+        }
+    },
+
+
+    "touchpad_issue": {
+        "patterns": [
+            "touchpad not working", "laptop mouse pad dead", "touchpad frozen",
+            "touchpad lagging", "gestures not working"
+        ],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "Laptop touchpad not responding:",
+            "category": "Peripheral",
+            "confidence": "high",
+            "priority": "MEDIUM",
+            "rule_advice": [
+                "Fn + F-key with touchpad icon",
+                "Update Synaptics/ELAN driver from brand site",
+                "Device Manager → uninstall touchpad → restart",
+                "Still dead → ribbon cable loose or touchpad failed"
+            ]
+        }
+    },
+
+    "charging_issue": {
+        "patterns": [
+            "not charging", "plugged in not charging", "battery stuck at", "charger not recognized"
+        ],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "Laptop not charging:",
+            "category": "Power",
+            "confidence": "high",
+            "priority": "HIGH",
+            "rule_advice": [
+                "Hold power 60s unplugged",
+                "Try different charger",
+                "Remove battery → plug in directly",
+                "Update BIOS + chipset",
+                "Battery >80% wear → replace",
+                "Still not → charging circuit dead"
+            ]
+        }
+    },
+
+    "swollen_battery": {
+        "patterns": ["battery swollen", "battery bulging", "trackpad popping up", "battery pushing"],
+        "expert_advice": {
+            "type": "expert_diagnosis",
+            "content": "SWOLLEN BATTERY = FIRE/EXPLOSION RISK!",
+            "category": "Safety Emergency",
+            "confidence": "high",
+            "priority": "CRITICAL",
+            "rule_advice": [
+                "STOP USING IMMEDIATELY",
+                "Do not charge or puncture",
+                "Remove battery carefully",
+                "Store in cool place away from flammable items",
+                "Replace with genuine battery only"
+            ]
+        }
+    },
+
+
     "emergency": {
         "patterns": [
             "smoke", "fire", "spark", "burning", "water", "liquid", "wet"
@@ -528,39 +643,63 @@ def enhanced_reason(facts: List[Dict], question: str, system_metrics: Optional[D
                     "priority": get_priority_level(flat_fact, system_metrics) or "MEDIUM",
                     "rule_advice": execute_all_rules(flat_fact, system_metrics) or [],
                     "troubleshooting_steps": generate_troubleshooting_steps(flat_fact) or [],
-                    "source_question": qa["question"]
+                    "source_question": qa["question"],
+                    "is_emergency_content": is_emergency_content(qa.get("answer", ""))
                 })
 
-    # === 4. IMPROVED KB FILTERING WITH EMERGENCY CONTEXT CHECK ===
+    # === 4. IMPROVED KB FILTERING WITH CONTEXT-AWARE PRIORITIZATION ===
     best_kb_matches = []
     if kb_matches:
-        # Sort by confidence and score
+        # === CRITICAL FIX: Context-aware sorting ===
+        # First, separate emergency vs non-emergency matches
+        emergency_matches = [m for m in kb_matches if m.get("is_emergency_content", False)]
+        normal_matches = [m for m in kb_matches if not m.get("is_emergency_content", False)]
+        
+        # === FIX: Only show emergency matches if query actually mentions emergencies ===
+        query_has_emergency = any(word in q for word in ["water", "liquid", "spill", "wet", "smoke", "fire", "spark", "burning"])
+        
+        if query_has_emergency:
+            # If query mentions emergencies, prioritize emergency matches
+            all_matches = emergency_matches + normal_matches
+        else:
+            # If normal query, DEPRIORITIZE emergency matches (they're usually wrong)
+            all_matches = normal_matches + emergency_matches
+        
+        # Sort by confidence and relevance to the actual query
         confidence_order = {"perfect": 4, "high": 3, "medium": 2, "low": 1}
-        kb_matches.sort(key=lambda x: (
+        
+        # Calculate query relevance score for each match
+        for match in all_matches:
+            match["relevance_score"] = calculate_query_relevance(match, q)
+        
+        # Sort by: relevance_score > confidence > match_score
+        all_matches.sort(key=lambda x: (
+            x["relevance_score"],
             confidence_order.get(x["confidence"], 0),
             x["match_score"]
         ), reverse=True)
         
         # === SMART RELEVANCE FILTERING ===
         best_matches = []
-        
-        # Extract main keywords from the question
         question_keywords = extract_main_keywords(q)
         
-        for match in kb_matches:
+        for match in all_matches:
             # Skip low-confidence matches for common questions
             if match["confidence"] == "low" and match["match_score"] < 0.4:
                 continue
             
-            # === CRITICAL FIX: Check if emergency content is actually relevant ===
-            if not is_emergency_relevant(match, q):
+            # === CRITICAL FIX: Enhanced emergency relevance check ===
+            if not is_emergency_context_appropriate(match, q):
                 continue
                 
             # Check if match content is actually relevant to the question
             match_text = (match["content"] + " " + match.get("source_question", "")).lower()
-            
-            # Calculate relevance score based on keyword overlap
             relevance_score = calculate_relevance_score(question_keywords, match_text)
+            
+            # Higher threshold for emergency content in normal queries
+            if match.get("is_emergency_content", False) and not query_has_emergency:
+                if relevance_score < 0.7:  # Require very high relevance for emergency content
+                    continue
             
             # Only keep highly relevant matches
             if (relevance_score > 0.3 or 
@@ -582,10 +721,10 @@ def enhanced_reason(facts: List[Dict], question: str, system_metrics: Optional[D
             best_matches = [m for m in best_matches if m["match_score"] > 0.3 or m["confidence"] in ["perfect", "high"]]
         
         # If no good matches found, take top 1-2 by score as fallback
-        if not best_matches and kb_matches:
-            # But filter out emergency matches for normal queries
-            non_emergency_matches = [m for m in kb_matches if is_emergency_relevant(m, q)]
-            best_matches = non_emergency_matches[:1] if non_emergency_matches else kb_matches[:1]
+        if not best_matches and all_matches:
+            # Filter out inappropriate emergency matches
+            appropriate_matches = [m for m in all_matches if is_emergency_context_appropriate(m, q)]
+            best_matches = appropriate_matches[:1] if appropriate_matches else all_matches[:1]
         
         # Store the best KB matches separately
         best_kb_matches = best_matches[:2]  # Strict limit to 2 best matches
@@ -654,12 +793,68 @@ def enhanced_reason(facts: List[Dict], question: str, system_metrics: Optional[D
             # Replace poor KB matches with good symptom advice
             answers = symptom_advice + [a for a in answers if a.get("type") != "kb_match"]
 
+
+       
+    def filter_irrelevant_answers(answers: List[Dict], query: str, primary_symptoms: Dict) -> List[Dict]:
+        """Remove answers that are completely irrelevant to the query context"""
+        filtered = []
+        
+        # Get the main symptom (most relevant one)
+        main_symptom = None
+        for symptom, detected in primary_symptoms.items():
+            if detected and symptom != "emergency":
+                main_symptom = symptom
+                break
+        
+        for answer in answers:
+            answer_category = answer.get("category", "")
+            answer_type = answer.get("type", "")
+            
+            # === POWER ISSUES ===
+            if main_symptom == "no_power":
+                # Skip keyboard/mouse/audio for power failures
+                if answer_category in ["Input Devices", "Peripheral", "Audio"]:
+                    continue
+                # Skip preventive maintenance for critical power issues
+                if answer_type == "preventive":
+                    continue
+                    
+            # === PERFORMANCE/SLOW ISSUES ===  
+            elif main_symptom in ["slow", "high_cpu", "crashing"]:
+                # Skip keyboard/mouse cleaning for performance issues
+                if answer_category in ["Input Devices", "Peripheral"]:
+                    continue
+                # Skip liquid spill procedures for slow computer
+                if "liquid" in answer.get("content", "").lower() or "spill" in answer.get("content", "").lower():
+                    continue
+                    
+            # === SCREEN ISSUES ===
+            elif main_symptom == "screen_issue":
+                # Skip keyboard/audio for display problems
+                if answer_category in ["Input Devices", "Peripheral", "Audio"]:
+                    continue
+                    
+            # === ALWAYS filter these regardless of symptom ===
+            # Skip keyboard cleaning for any performance/power/display issues
+            if "keyboard" in answer.get("content", "").lower() and "clean" in answer.get("content", "").lower():
+                if main_symptom in ["no_power", "slow", "high_cpu", "screen_issue", "crashing"]:
+                    continue
+            
+            filtered.append(answer)
+        
+        return filtered
+
+    # Add this right before the final sorting (around line 350):
+    answers = filter_irrelevant_answers(answers, q, symptoms)
+
     # === 9. IMPROVED SORTING & DEDUPLICATION ===
     priority_order = {"CRITICAL": 5, "HIGH": 4, "MEDIUM": 3, "LOW": 2, "NORMAL": 1}
     confidence_order = {"perfect": 4, "high": 3, "medium": 2, "low": 1}
 
+    # Final sort with context awareness
     answers.sort(key=lambda x: (
         priority_order.get(x.get("priority", "LOW"), 0),
+        x.get("relevance_score", 0),  # New: relevance to actual query
         confidence_order.get(x.get("confidence", "low"), 0),
         x.get("match_score", 0)
     ), reverse=True)
@@ -675,6 +870,59 @@ def enhanced_reason(facts: List[Dict], question: str, system_metrics: Optional[D
             unique.append(a)
 
     return unique[:4] if unique else [fallback_answer()]
+
+
+def is_emergency_content(content: str) -> bool:
+    """Check if content contains emergency/liquid spill instructions"""
+    emergency_phrases = [
+        "IMMEDIATELY shut down", "unplug power", "remove battery", 
+        "drain liquid", "do not use heat to dry", "let dry completely",
+        "liquid spill", "water damage", "wet laptop"
+    ]
+    content_upper = content.upper()
+    return any(phrase.upper() in content_upper for phrase in emergency_phrases)
+
+
+def calculate_query_relevance(match: Dict, query: str) -> float:
+    """Calculate how relevant a match is to the specific query"""
+    # Base relevance score
+    relevance = match.get("match_score", 0)
+    
+    # Boost exact matches to common power issues
+    power_queries = ["won't turn on", "no power", "dead", "not powering on", "wont turn on"]
+    if any(power_q in query for power_q in power_queries):
+        # Boost power-related matches
+        if "power" in match.get("content", "").lower() or "power" in match.get("source_question", "").lower():
+            relevance += 0.3
+    
+    # Penalize emergency content for normal queries
+    if match.get("is_emergency_content", False):
+        emergency_indicators = ["water", "liquid", "spill", "wet", "smoke", "fire"]
+        if not any(indicator in query for indicator in emergency_indicators):
+            relevance -= 0.4  # Significant penalty for irrelevant emergency content
+    
+    return max(0.0, min(1.0, relevance))
+
+
+def is_emergency_context_appropriate(match: Dict, query: str) -> bool:
+    """Check if emergency content is appropriate for this query context"""
+    if not match.get("is_emergency_content", False):
+        return True
+    
+    # Emergency content is only appropriate if query mentions emergencies
+    emergency_indicators = ["water", "liquid", "spill", "wet", "smoke", "fire", "spark", "burning"]
+    query_has_emergency = any(indicator in query for indicator in emergency_indicators)
+    
+    # Also check if the match is actually about the same type of emergency
+    if query_has_emergency:
+        match_content = match.get("content", "").lower()
+        # If query has water emergency but match is about fire, it's not appropriate
+        if "water" in query and "fire" in match_content:
+            return False
+        if "fire" in query and "water" in match_content:
+            return False
+    
+    return query_has_emergency
 
 
 def should_enhance_with_symptom_advice(kb_matches: List[Dict], symptom_advice: Dict) -> bool:
@@ -729,37 +977,6 @@ def should_enhance_with_symptom_advice(kb_matches: List[Dict], symptom_advice: D
             return True
     
     return False
-
-
-def is_emergency_relevant(match: Dict, question: str) -> bool:
-    """Check if an emergency match is actually relevant to the query"""
-    # Emergency indicators that must be present in the question
-    emergency_indicators = [
-        "smoke", "fire", "spark", "burning", "electrical", "hazard", 
-        "flame", "burned", "smoking", "sparked", "safety hazard"
-    ]
-    
-    # Content that indicates emergency response
-    emergency_content_indicators = [
-        "IMMEDIATE SAFETY HAZARD", "UNPLUG", "CRITICAL SAFETY", 
-        "fire", "smoke", "spark", "burning", "electrical hazard"
-    ]
-    
-    question_lower = question.lower()
-    match_content = match.get("content", "").lower()
-    match_question = match.get("source_question", "").lower()
-    
-    # If match contains emergency content but question has no emergency words, downgrade it
-    has_emergency_content = any(indicator in match_content for indicator in emergency_content_indicators)
-    has_emergency_question = any(indicator in match_question for indicator in emergency_content_indicators)
-    
-    question_has_emergency = any(indicator in question_lower for indicator in emergency_indicators)
-    
-    # If it's emergency content but question doesn't mention emergencies, skip it
-    if (has_emergency_content or has_emergency_question) and not question_has_emergency:
-        return False
-        
-    return True
 
 
 def extract_main_keywords(question: str) -> List[str]:
