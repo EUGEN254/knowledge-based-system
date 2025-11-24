@@ -184,7 +184,7 @@ SYMPTOM_DEFINITIONS = {
             "content": "Low disk space causes:\n"
                        "• System slowdown and freezing\n"
                        "• Inability to install updates\n"
-                       "• Program crashes and data loss riskk",
+                       "• Program crashes and data loss risk",
             "category": "Storage",
             "confidence": "high",
             "priority": "MEDIUM",
