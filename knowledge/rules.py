@@ -266,7 +266,7 @@ def get_preventive_maintenance_advice(fact):
     if any(word in question for word in ["overheat", "fan", "fans", "noise", "dust", "clean"]):
         maintenance_advice.append("• Clean dust every 3-6 months")
         maintenance_advice.append("• Monitor temperatures regularly")
-        maintenance_advice.append(" Ensure proper ventilation")
+        maintenance_advice.append("• Ensure proper ventilation")
     
     # Software maintenance
     if any(word in question for word in ["slow", "crash", "update", "virus"]):
